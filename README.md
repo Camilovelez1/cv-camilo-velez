@@ -18,9 +18,12 @@ Desde cualquier subcarpeta:
 
 ```bash
 pdflatex camilo_velez_cv_es_industria.tex
+
+xelatex -output-directory=en/output en/industry/camilo_velez_cv_en_industry.tex
 ```
 
 O usar el script global:
+
 ```bash
 bash compile_all.sh
 ```
