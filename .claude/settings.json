@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/home/camilo/cv-camilo-velez/.venv/bin/pip install:*)"
+    ]
+  }
+}
