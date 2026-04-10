@@ -193,7 +193,22 @@ def create_cv():
 
     # Create a table with 1 row, 2 columns for badge + text layout
     cert_table = doc.add_table(rows=1, cols=2)
-    cert_table.autofit = True
+    cert_table.autofit = False
+
+    # Force grid column widths: narrow badge + wide text
+    tbl = cert_table._tbl
+    tblPr = tbl.find(qn("w:tblPr"))
+    tblLayout = OxmlElement("w:tblLayout")
+    tblLayout.set(qn("w:type"), "fixed")
+    tblPr.append(tblLayout)
+    tblW = tblPr.find(qn("w:tblW"))
+    if tblW is not None:
+        tblW.set(qn("w:type"), "dxa")
+        tblW.set(qn("w:w"), "9638")
+    tblGrid = tbl.find(qn("w:tblGrid"))
+    gridCols = tblGrid.findall(qn("w:gridCol"))
+    gridCols[0].set(qn("w:w"), "1134")  # ~2cm for badge
+    gridCols[1].set(qn("w:w"), "8504")  # rest for text
 
     # Badge cell (left, narrow)
     badge_cell = cert_table.cell(0, 0)
